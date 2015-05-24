@@ -5,10 +5,10 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">Kecamatan</div>
+				<div class="panel-heading">Kelurahan</div>
 
 				<div class="panel-body">
-				<a class="btn btn-small btn-success" href="{{ URL::to('kecamatan/create') }}">Tambah Data Kecamatan</a>
+				<a class="btn btn-small btn-success" href="{{ URL::to('kelurahan/create') }}">Tambah Data Kelurahan</a>
 				<hr />
 @if (Session::has('message'))
 	<div class="alert alert-info">{{ Session::get('message') }}</div>
@@ -19,18 +19,20 @@
         <tr>
             <td>ID</td>
             <td>Kecamatan</td>
+            <td>Kelurahan</td>
             <td>Aksi</td>
         </tr>
     </thead>
     <tbody>
-    @foreach($kecamatan as $key => $value)
+    @foreach($kelurahanx as $value)
         <tr>
             <td>{{ $value->id }}</td>
-            <td>{{ $value->nama_kecamatan }}</td>
+            <td>{{ $value->kecamatan->nama_kecamatan }}</td>
+            <td>{{ $value->nama_kelurahan }}</td>
             <td>
 
-                <a class="btn btn-small btn-info" href="{{ URL::to('kecamatan/' . $value->id . '/edit') }}">Ganti</a>
-                {!! Form::open(array('url' => 'kecamatan/' . $value->id, 'class' => 'pull-right')) !!}
+                <a class="btn btn-small btn-info" href="{{ URL::to('kelurahan/' . $value->id . '/edit') }}">Ganti</a>
+                {!! Form::open(array('url' => 'kelurahan/' . $value->id, 'class' => 'pull-right')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
                     {!! Form::submit('Hapus', array('class' => 'btn btn-warning')) !!}
                 {!! Form::close() !!}

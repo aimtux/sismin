@@ -39,7 +39,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Wilayah <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 						<li><a href="{{ url('/kecamatan') }}">Kecamatan</a></li>
-						<li><a href="#">Kelurahan</a></li>
+						<li><a href="{{ url('/kelurahan') }}">Kelurahan</a></li>
 						</ul>
 						</li>
 					@endif
