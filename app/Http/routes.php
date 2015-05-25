@@ -22,3 +22,4 @@ Route::controllers([
 
 Route::resource('kecamatan', 'KecamatanController');
 Route::resource('kelurahan', 'KelurahanController');
+Route::resource('nama-kriminalitas', 'NamaKriminalitasController');

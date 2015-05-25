@@ -2,11 +2,11 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Kecamatan;
+use App\NamaKriminalitas;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
-class KecamatanController extends Controller {
+class NamaKriminalitasController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -17,8 +17,8 @@ class KecamatanController extends Controller {
 	{
 		if (Auth::check())
 		{
-			$kecamatanku = Kecamatan::all();
-			return view('kecamatan.index')->with('kecamatan', $kecamatanku);
+			$namakriminalitasku = NamaKriminalitas::all();
+			return view('namakriminalitas.index')->with('namakriminalitas', $namakriminalitasku);
 		} 
 		else
 		{
@@ -35,7 +35,7 @@ class KecamatanController extends Controller {
 	{
 		if (Auth::check())
 		{
-			return view('kecamatan.create');
+			return view('namakriminalitas.create');
 		}
 		else
 		{
@@ -53,22 +53,22 @@ class KecamatanController extends Controller {
 		if (Auth::check())
 		{
 			$rules = array(
-	            'nama_kecamatan' => 'required',
+	            'nama_kriminalitas' => 'required',
 	        );
 	        $validator = Validator::make(Input::all(), $rules);
 	        // process the login
 	        if ($validator->fails()) {
-	            return Redirect::to('kecamatan/create')
+	            return Redirect::to('nama-kriminalitas/create')
 	                ->withErrors($validator)
 	                ->withInput(Input::except('password'));
 	        } else {
 	            // store
-	            $kecamatanku = new Kecamatan;
-	            $kecamatanku->nama_kecamatan = Input::get('nama_kecamatan');
-	            $kecamatanku->save();
+	            $namakriminalitasku = new NamaKriminalitas;
+	            $namakriminalitasku->nama_kriminalitas = Input::get('nama_kriminalitas');
+	            $namakriminalitasku->save();
 	            // redirect
-	            Session::flash('message', 'Berhasil membuat Kecamatan!');
-	            return Redirect::to('kecamatan');
+	            Session::flash('message', 'Berhasil membuat Nama Kriminalitas!');
+	            return Redirect::to('nama-kriminalitas');
 	        }
     	}
     	else
@@ -85,16 +85,7 @@ class KecamatanController extends Controller {
 	 */
 	public function show($id)
 	{
-		if (Auth::check())
-		{
-			$kecamatanku = Kecamatan::find($id);
-	        return view('kecamatan.show')
-	            ->with('kecamatan', $kecamatanku);
-        }
-        else
-		{
-			return Redirect::to('/auth/login');
-		}
+		//
 	}
 
 	/**
@@ -107,9 +98,9 @@ class KecamatanController extends Controller {
 	{
 		if (Auth::check())
 		{
-		$kecamatanku = Kecamatan::find($id);
-        return view('kecamatan.edit')
-            ->with('kecamatan', $kecamatanku);
+		$namakriminalitasku = NamaKriminalitas::find($id);
+        return view('namakriminalitas.edit')
+            ->with('namakriminalitas', $namakriminalitasku);
         }
         else
 		{
@@ -128,21 +119,21 @@ class KecamatanController extends Controller {
 		if (Auth::check())
 		{
 				$rules = array(
-	            'nama_kecamatan' => 'required',
+	            'nama_kriminalitas' => 'required',
 	        );
 	        $validator = Validator::make(Input::all(), $rules);
 	        if ($validator->fails()) {
-	            return Redirect::to('kecamatan/' . $id . '/edit')
+	            return Redirect::to('nama-kriminalitas/' . $id . '/edit')
 	                ->withErrors($validator)
 	                ->withInput(Input::except('password'));
 	        } else {
 	            // simpan
-	            $kecamatanku = Kecamatan::find($id);
-	            $kecamatanku->nama_kecamatan = Input::get('nama_kecamatan');
-	            $kecamatanku->save();
+	            $namakriminalitasku = NamaKriminalitas::find($id);
+	            $namakriminalitasku->nama_kriminalitas = Input::get('nama_kriminalitas');
+	            $namakriminalitasku->save();
 	            // redirect
-	            Session::flash('message', 'Berhasil mengganti Kecamatan!');
-	            return Redirect::to('kecamatan');
+	            Session::flash('message', 'Berhasil mengganti Nama Kriminalitas!');
+	            return Redirect::to('nama-kriminalitas');
 	        }
 		}
 		else
@@ -161,15 +152,16 @@ class KecamatanController extends Controller {
 	{
 		if (Auth::check())
 		{
-			$kecamatanku = Kecamatan::find($id);
-	        $kecamatanku->delete();
+			$namakriminalitasku = NamaKriminalitas::find($id);
+	        $namakriminalitasku->delete();
 	        // redirect
-	        Session::flash('message', 'Berhasil menghapus Kecamatan!');
-	        return Redirect::to('kecamatan');
+	        Session::flash('message', 'Berhasil menghapus NamaKriminalitas!');
+	        return Redirect::to('nama-kriminalitas');
 		}
 		else
 		{
 			return Redirect::to('/auth/login');
 		}
 	}
+
 }
