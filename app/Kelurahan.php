@@ -9,4 +9,9 @@ class Kelurahan extends Model {
         return $this->belongsTo('App\Kecamatan');
     }
 
+    public function getKecamatanLists()
+	{
+		return Kecamatan::lists('nama_kecamatan', 'id');
+	}
+
 }

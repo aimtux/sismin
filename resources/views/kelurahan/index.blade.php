@@ -24,7 +24,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($kelurahanx as $value)
+    @foreach($kelurahan as $value)
         <tr>
             <td>{{ $value->id }}</td>
             <td>{{ $value->kecamatan->nama_kecamatan }}</td>

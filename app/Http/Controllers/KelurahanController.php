@@ -37,7 +37,7 @@ class KelurahanController extends Controller {
 		if (Auth::check())
 		{
 			$kecamatanku = Kecamatan::lists('nama_kecamatan', 'id');
-			return view('kelurahan.create')->with('kecamatan', $kecamatanku);;
+			return view('kelurahan.create')->with('kecamatan', $kecamatanku);
 		}
 	}
 
@@ -92,7 +92,12 @@ class KelurahanController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		if (Auth::check())
+		{
+			$kelurahanku = Kelurahan::find($id);
+	        return view('kelurahan.edit')
+	            ->with('kelurahan', $kelurahanku);
+        }
 	}
 
 	/**
@@ -103,7 +108,24 @@ class KelurahanController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$rules = array(
+            'nama_kelurahan'       => 'required',
+        );
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            return Redirect::to('kelurahan/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            // simpan
+            $kelurahanku = Kelurahan::find($id);
+            $kelurahanku->kecamatan_id       = Input::get('kecamatan_id');
+            $kelurahanku->nama_kelurahan      = Input::get('nama_kelurahan');
+            $kelurahanku->save();
+            // redirect
+            Session::flash('message', 'Berhasil mengganti Kelurahan!');
+            return Redirect::to('kelurahan');
+        }
 	}
 
 	/**
