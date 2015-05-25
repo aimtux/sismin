@@ -30,6 +30,7 @@
             <td>
 
                 <a class="btn btn-small btn-info" href="{{ URL::to('kecamatan/' . $value->id . '/edit') }}">Ganti</a>
+                <a class="btn btn-small btn-success" href="{{ URL::to('kecamatan/' . $value->id) }}">Tampilkan</a>
                 {!! Form::open(array('url' => 'kecamatan/' . $value->id, 'class' => 'pull-right')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
                     {!! Form::submit('Hapus', array('class' => 'btn btn-warning')) !!}

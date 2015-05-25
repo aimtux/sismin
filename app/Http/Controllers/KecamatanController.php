@@ -77,7 +77,9 @@ class KecamatanController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$kecamatanku = Kecamatan::find($id);
+        return view('kecamatan.show')
+            ->with('kecamatan', $kecamatanku);
 	}
 
 	/**
