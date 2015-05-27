@@ -26,6 +26,11 @@
 					{!! Form::label('namakriminalitas_id', 'Nama Kriminalitas') !!}
 					{!! Form::select('namakriminalitas_id', $namakriminalitas, null, array('class' => 'form-control')) !!}
 					</div>
+
+					<div class="form-group">
+					{!! Form::label('tgl_info', 'Tanggal Informasi') !!}
+					{!! Form::text('tgl_info', date('d-m-Y', strtotime($infokriminalitas->tgl_info)), array('class' => 'form-control', 'id' => 'datepicker')) !!}
+					</div>
 					
 					<div class="form-group">
 					{!! Form::label('informasi', 'Informasi Kriminalitas') !!}

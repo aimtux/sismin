@@ -67,6 +67,7 @@ class InfoKriminalitasController extends Controller {
 	            'kecamatan_id' => 'required',
 	            'kelurahan_id' => 'required',
 	            'namakriminalitas_id' => 'required',
+	            'tgl_info' => 'required|date_format:"d-m-Y"',
 	            'informasi' => 'required',
 	        );
 	        $validator = Validator::make(Input::all(), $rules);
@@ -77,10 +78,13 @@ class InfoKriminalitasController extends Controller {
 	                ->withInput(Input::except('password'));
 	        } else {
 	            // store
+	            $format_tgl_info_old = Input::get('tgl_info');
+				$tgl_info = date("Y-m-d", strtotime($format_tgl_info_old));
 	            $infokriminalitasku = new InfoKriminalitas;
 	            $infokriminalitasku->kecamatan_id = Input::get('kecamatan_id');
 	            $infokriminalitasku->kelurahan_id = Input::get('kelurahan_id');
 	            $infokriminalitasku->namakriminalitas_id = Input::get('namakriminalitas_id');
+	            $infokriminalitasku->tgl_info = $tgl_info;
 	            $infokriminalitasku->informasi = Input::get('informasi');
 	            $infokriminalitasku->save();
 	            // redirect
@@ -145,6 +149,7 @@ class InfoKriminalitasController extends Controller {
 	            'kecamatan_id'       => 'required',
 	            'kelurahan_id'       => 'required',
 	            'namakriminalitas_id'       => 'required',
+	            'tgl_info' => 'required|date_format:"d-m-Y"',
 	            'informasi'       => 'required',
 	        );
 	        $validator = Validator::make(Input::all(), $rules);
@@ -154,10 +159,13 @@ class InfoKriminalitasController extends Controller {
 	                ->withInput(Input::except('password'));
 	        } else {
 	            // simpan
+	            $format_tgl_info_old = Input::get('tgl_info');
+				$tgl_info = date("Y-m-d", strtotime($format_tgl_info_old));
 	            $infokriminalitasku = InfoKriminalitas::find($id);
 	            $infokriminalitasku->kecamatan_id       = Input::get('kecamatan_id');
 	            $infokriminalitasku->kelurahan_id      = Input::get('kelurahan_id');
 	            $infokriminalitasku->namakriminalitas_id      = Input::get('namakriminalitas_id');
+	            $infokriminalitasku->tgl_info = $tgl_info;
 	            $infokriminalitasku->informasi      = Input::get('informasi');
 	            $infokriminalitasku->save();
 	            // redirect

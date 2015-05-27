@@ -21,6 +21,7 @@
             <td>Kecamatan</td>
             <td>Kelurahan</td>
             <td>Jenis Kriminalitas</td>
+            <td>tgl Info</td>
             <td>Informasi</td>
             <td>Aksi</td>
         </tr>
@@ -32,6 +33,7 @@
             <td>{{ $value->kecamatan->nama_kecamatan }}</td>
             <td>{{ $value->kelurahan->nama_kelurahan }}</td>
             <td>{{ $value->namakriminalitas->nama_kriminalitas }}</td>
+            <td>{{ date('d-m-Y', strtotime($value->tgl_info)) }}</td>
             <td>{{ $value->informasi }}</td>
             <td>
 

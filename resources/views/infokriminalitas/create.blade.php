@@ -26,6 +26,11 @@
 					</div>
 
 					<div class="form-group">
+					{!! Form::label('tgl_info', 'Tanggal Informasi') !!}
+					{!! Form::text('tgl_info', Input::old('informasi'), array('class' => 'form-control', 'id' => 'datepicker')) !!}
+					</div>
+
+					<div class="form-group">
 					{!! Form::label('informasi', 'Informasi Kriminalitas') !!}
 					{!! Form::textarea('informasi', Input::old('informasi'), array('class' => 'form-control')) !!}
 					</div>
