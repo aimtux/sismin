@@ -9,4 +9,9 @@ class Kecamatan extends Model {
         return $this->hasMany('App\Kelurahan');
     }
 
+    public function infokriminalitas()
+    {
+        return $this->belongsTo('App\InfoKriminalitas');
+    }
+
 }

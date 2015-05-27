@@ -39,6 +39,10 @@ class KelurahanController extends Controller {
 			$kecamatanku = Kecamatan::lists('nama_kecamatan', 'id');
 			return view('kelurahan.create')->with('kecamatan', $kecamatanku);
 		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -71,6 +75,10 @@ class KelurahanController extends Controller {
 	            return Redirect::to('kelurahan');
 	        }
     	}
+    	else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -98,6 +106,10 @@ class KelurahanController extends Controller {
 	        return view('kelurahan.edit')
 	            ->with('kelurahan', $kelurahanku);
         }
+        else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -108,24 +120,31 @@ class KelurahanController extends Controller {
 	 */
 	public function update($id)
 	{
-		$rules = array(
-            'nama_kelurahan'       => 'required',
-        );
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return Redirect::to('kelurahan/' . $id . '/edit')
-                ->withErrors($validator)
-                ->withInput(Input::except('password'));
-        } else {
-            // simpan
-            $kelurahanku = Kelurahan::find($id);
-            $kelurahanku->kecamatan_id       = Input::get('kecamatan_id');
-            $kelurahanku->nama_kelurahan      = Input::get('nama_kelurahan');
-            $kelurahanku->save();
-            // redirect
-            Session::flash('message', 'Berhasil mengganti Kelurahan!');
-            return Redirect::to('kelurahan');
+		if (Auth::check())
+		{
+			$rules = array(
+		        'nama_kelurahan' => 'required',
+		    );
+		    $validator = Validator::make(Input::all(), $rules);
+		    if ($validator->fails()) {
+		        return Redirect::to('kelurahan/' . $id . '/edit')
+		            ->withErrors($validator)
+		            ->withInput(Input::except('password'));
+		    } else {
+		        // simpan
+		        $kelurahanku = Kelurahan::find($id);
+		        $kelurahanku->kecamatan_id = Input::get('kecamatan_id');
+		        $kelurahanku->nama_kelurahan = Input::get('nama_kelurahan');
+		        $kelurahanku->save();
+		        // redirect
+		        Session::flash('message', 'Berhasil mengganti Kelurahan!');
+		        return Redirect::to('kelurahan');
+		    }
         }
+        else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -136,7 +155,18 @@ class KelurahanController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if (Auth::check())
+		{
+			$kelurahanku = Kelurahan::find($id);
+	        $kelurahanku->delete();
+	        // redirect
+	        Session::flash('message', 'Berhasil menghapus Kelurahan!');
+	        return Redirect::to('kecamatan');
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 }
