@@ -27,7 +27,12 @@
 
 					<div class="form-group">
 					{!! Form::label('tgl_info', 'Tanggal Informasi') !!}
-					{!! Form::text('tgl_info', Input::old('informasi'), array('class' => 'form-control', 'id' => 'datepicker')) !!}
+					{!! Form::text('tgl_info', Input::old('tgl_info'), array('class' => 'form-control', 'id' => 'datepicker')) !!}
+					</div>
+
+					<div class="form-group">
+					{!! Form::label('jam_info', 'Jam Informasi') !!}
+					{!! Form::text('jam_info', Input::old('jam_info'), array('class' => 'form-control', 'id' => 'timepicker')) !!}
 					</div>
 
 					<div class="form-group">

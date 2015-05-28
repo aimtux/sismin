@@ -31,6 +31,11 @@
 					{!! Form::label('tgl_info', 'Tanggal Informasi') !!}
 					{!! Form::text('tgl_info', date('d-m-Y', strtotime($infokriminalitas->tgl_info)), array('class' => 'form-control', 'id' => 'datepicker')) !!}
 					</div>
+
+					<div class="form-group">
+					{!! Form::label('jam_info', 'Jam Informasi') !!}
+					{!! Form::text('jam_info', date('H:i', strtotime($infokriminalitas->jam_info)), array('class' => 'form-control', 'id' => 'timepicker')) !!}
+					</div>
 					
 					<div class="form-group">
 					{!! Form::label('informasi', 'Informasi Kriminalitas') !!}

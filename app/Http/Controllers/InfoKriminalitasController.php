@@ -68,23 +68,26 @@ class InfoKriminalitasController extends Controller {
 	            'kelurahan_id' => 'required',
 	            'namakriminalitas_id' => 'required',
 	            'tgl_info' => 'required|date_format:"d-m-Y"',
+	            'jam_info' => 'required|date_format:"H:i',
 	            'informasi' => 'required',
 	        );
 	        $validator = Validator::make(Input::all(), $rules);
 	        // process the login
 	        if ($validator->fails()) {
 	            return Redirect::to('info-kriminalitas/create')
-	                ->withErrors($validator)
-	                ->withInput(Input::except('password'));
+	                ->withErrors($validator);
 	        } else {
 	            // store
 	            $format_tgl_info_old = Input::get('tgl_info');
+				$tgl_info = date("Y-m-d", strtotime($format_tgl_info_old));
+				//$format_jam_info_old = Input::get('tgl_info');
 				$tgl_info = date("Y-m-d", strtotime($format_tgl_info_old));
 	            $infokriminalitasku = new InfoKriminalitas;
 	            $infokriminalitasku->kecamatan_id = Input::get('kecamatan_id');
 	            $infokriminalitasku->kelurahan_id = Input::get('kelurahan_id');
 	            $infokriminalitasku->namakriminalitas_id = Input::get('namakriminalitas_id');
 	            $infokriminalitasku->tgl_info = $tgl_info;
+	            $infokriminalitasku->jam_info = Input::get('jam_info');
 	            $infokriminalitasku->informasi = Input::get('informasi');
 	            $infokriminalitasku->save();
 	            // redirect
@@ -150,13 +153,13 @@ class InfoKriminalitasController extends Controller {
 	            'kelurahan_id'       => 'required',
 	            'namakriminalitas_id'       => 'required',
 	            'tgl_info' => 'required|date_format:"d-m-Y"',
+	            'jam_info' => 'required|date_format:"H:i"',
 	            'informasi'       => 'required',
 	        );
 	        $validator = Validator::make(Input::all(), $rules);
 	        if ($validator->fails()) {
 	            return Redirect::to('info-kriminalitas/' . $id . '/edit')
-	                ->withErrors($validator)
-	                ->withInput(Input::except('password'));
+	                ->withErrors($validator);
 	        } else {
 	            // simpan
 	            $format_tgl_info_old = Input::get('tgl_info');
@@ -166,6 +169,7 @@ class InfoKriminalitasController extends Controller {
 	            $infokriminalitasku->kelurahan_id      = Input::get('kelurahan_id');
 	            $infokriminalitasku->namakriminalitas_id      = Input::get('namakriminalitas_id');
 	            $infokriminalitasku->tgl_info = $tgl_info;
+	            $infokriminalitasku->jam_info  = Input::get('jam_info');
 	            $infokriminalitasku->informasi      = Input::get('informasi');
 	            $infokriminalitasku->save();
 	            // redirect

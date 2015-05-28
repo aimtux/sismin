@@ -19,6 +19,7 @@ class CreateInfoKriminalitasTable extends Migration {
 			$table->integer('kelurahan_id');
 			$table->integer('namakriminalitas_id');
 			$table->date('tgl_info');
+			$table->time('jam_info');
 			$table->text('informasi');
 			$table->timestamps();
 		});
